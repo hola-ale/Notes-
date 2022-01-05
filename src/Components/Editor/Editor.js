@@ -3,7 +3,7 @@ import ReactMde from "react-mde";
 import Showdown from "showdown";
 
 export default function Editor({currentNote, updateNote}) {
-    cost [selectedTab, setselectedTab] = React.useState("write")
+    const [selectedTab, setSelectedTab] = React.useState("write")
     const converter = new Showdown.Converter({
         tables: true,
         simplifiedAutoLink: true,
@@ -12,7 +12,7 @@ export default function Editor({currentNote, updateNote}) {
     })
 
     return (
-        <section className="editor--panel">
+        <section className="editor panel">
             <ReactMde
                 value={currentNote.body}
                 onChange={updateNote}

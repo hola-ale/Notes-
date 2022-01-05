@@ -2,6 +2,8 @@ import React from "react";
 import Split from "react-split";
 import {nanoid} from "nanoid";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import Editor from "./Components/Editor/Editor";
+import "./App.css"
 
 export default function App() {
   const [notes, setNotes] = React.useState(
@@ -21,12 +23,13 @@ export default function App() {
     }
     setNotes(prevNotes => [newNote, ...prevNotes])
     setCurrentNoteId(newNote.id)
+    console.log(notes)
   }
 
   function updateNote(bodytext) {
     setNotes(oldNotes => {
       const newNotesArray = []
-      for(let i=0; i < oldNotes.size; i++) {
+      for(let i=0; i < oldNotes.length; i++) {
         const oldNote = oldNotes[i]
         if(oldNote.id === currentNoteId) {
           newNotesArray.unshift({...oldNote, body: bodytext})
@@ -52,7 +55,7 @@ export default function App() {
   return (
     <div className="App">
       {
-        notes.size > 0
+        notes.length > 0
         ?
         <Split
           sizes={[30, 70]} 
@@ -63,11 +66,12 @@ export default function App() {
             notes={notes}
             currentNote={findCurrentNote()}
             setCurrentNoteId={setCurrentNoteId}
-            newNote={newNote}
+            newNote={createNewNote}
+            deleteNote={deleteNote}
           />
           {
             currentNoteId 
-            && notes.size > 0 
+            && notes.length > 0 
             && <Editor
               currentNote={findCurrentNote()}
               updateNote={updateNote}
@@ -81,7 +85,7 @@ export default function App() {
               className="first-note" 
               onClick={createNewNote}
           >
-              Create one now
+              Create new note
           </button>
         </div>
       }
