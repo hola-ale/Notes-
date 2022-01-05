@@ -12,7 +12,7 @@ export default function Editor({currentNote, updateNote}) {
     })
 
     return (
-        <section className="editor-panel">
+        <section className="editor--panel">
             <ReactMde
                 value={currentNote.body}
                 onChange={updateNote}
